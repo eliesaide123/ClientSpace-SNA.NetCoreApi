@@ -2,6 +2,7 @@
 using Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ClientSpaceCoreApi.Controllers
 {
@@ -14,7 +15,7 @@ namespace ClientSpaceCoreApi.Controllers
             _blc = new BusinessLogic();
         }
         [HttpGet]
-        public ActionResult Check_Credentials(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        public async Task<IActionResult> Check_Credentials(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
         {
             CredentialsDto credentials = new CredentialsDto()
             {
@@ -25,7 +26,7 @@ namespace ClientSpaceCoreApi.Controllers
                 SessionID = sessionId
             };
             var response = _blc.Authenticate(credentials);
-            return Ok(response);
+            return Ok(response.IsAuthenticated);
         }
     }
 }
