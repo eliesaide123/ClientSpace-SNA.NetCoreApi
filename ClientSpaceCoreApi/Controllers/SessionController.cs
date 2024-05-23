@@ -9,8 +9,9 @@ namespace ClientSpaceCoreApi.Controllers
     public class SessionController : ControllerBase
     {
         private readonly BusinessLogic _blc;
+        private readonly HttpContextAccessor _contextAccessor = new HttpContextAccessor();
         public SessionController() {
-            _blc = new BusinessLogic();
+            _blc = new BusinessLogic(_contextAccessor);
         }
         [HttpGet("session-id")]
         public IActionResult GetSessionId()
