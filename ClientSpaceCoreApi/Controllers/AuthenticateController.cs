@@ -14,8 +14,8 @@ namespace ClientSpaceCoreApi.Controllers
         public AuthenticateController() {
             _blc = new BusinessLogic();
         }
-        [HttpGet]
-        public async Task<IActionResult> Check_Credentials(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        [HttpGet("check-credentials")]
+        public IActionResult Check_Credentials(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
         {
             CredentialsDto credentials = new CredentialsDto()
             {
@@ -26,7 +26,8 @@ namespace ClientSpaceCoreApi.Controllers
                 SessionID = sessionId
             };
             var response = _blc.Authenticate(credentials);
-            return Ok(response.IsAuthenticated);
+            var IsAuthenticated = response.IsAuthenticated;
+            return Ok(new { IsAuthenticated });
         }
     }
 }

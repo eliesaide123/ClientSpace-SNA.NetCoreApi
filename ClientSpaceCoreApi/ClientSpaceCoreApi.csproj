@@ -15,10 +15,10 @@
 
   <ItemGroup>
     <Reference Include="BLC">
-      <HintPath>..\..\..\Client Space - Class Library - SNA\CS\BLC\bin\Debug\net8.0\BLC.dll</HintPath>
+      <HintPath>..\..\ClientSpace--ClassLibrary-SNA\CS\BLC\bin\Debug\net8.0\BLC.dll</HintPath>
     </Reference>
     <Reference Include="Entities">
-      <HintPath>..\..\..\Client Space - Class Library - SNA\CS\Entities\bin\Debug\net8.0\Entities.dll</HintPath>
+      <HintPath>..\..\ClientSpace--ClassLibrary-SNA\CS\Entities\bin\Debug\net8.0\Entities.dll</HintPath>
     </Reference>
   </ItemGroup>
 
