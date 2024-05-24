@@ -2,6 +2,7 @@
 using BLC.LoginComponent;
 using BLC.ProfileComponent;
 using Entities;
+using Entities.JSONResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -53,11 +54,9 @@ namespace ClientSpaceCoreApi.Controllers
             var user = JsonConvert.DeserializeObject<CredentialsDto>(response.ToString());
 
             var loginResponse = _blc.IsFirstLogin(user) as NameValueCollection;
-            var IsFirstLogin = user.IsFirstLogin;
-            var IsAuthenticated = user.IsAuthenticated;
             Dictionary<string, string> oServerResponse = loginResponse.AllKeys.ToDictionary(key => key, key => loginResponse[key]);
 
-            return Ok( new { IsAuthenticated, IsFirstLogin, oServerResponse });
+            return Ok( new { user , oServerResponse });
         }
 
         [HttpGet("get-user")]
@@ -72,8 +71,11 @@ namespace ClientSpaceCoreApi.Controllers
                 SessionID = sessionId
             };
 
-            _blcProfile.DQ_GetUserAccount(credentials);
-            return Ok();
+            var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
+            var data = JsonConvert.DeserializeObject<GetUserAccountResponse>(responseObject);
+            var userAccount = data.UserAccount;
+            var questions = data.Questions;
+            return Ok(new { userAccount, questions });
         }
 
     }
