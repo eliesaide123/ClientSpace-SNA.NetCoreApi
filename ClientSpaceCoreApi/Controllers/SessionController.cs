@@ -1,4 +1,5 @@
 ﻿using BLC;
+using BLC.LoginComponent;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,9 @@ namespace ClientSpaceCoreApi.Controllers
     [ApiController]
     public class SessionController : ControllerBase
     {
-        private readonly BusinessLogic _blc;
-        private readonly HttpContextAccessor _contextAccessor = new HttpContextAccessor();
-        public SessionController() {
-            _blc = new BusinessLogic(_contextAccessor);
+        private readonly BusinessLogicLogin _blc;
+        public SessionController(IHttpContextAccessor _contextAccessor) {
+            _blc = new BusinessLogicLogin(_contextAccessor);
         }
         [HttpGet("session-id")]
         public IActionResult GetSessionId()
