@@ -1,5 +1,6 @@
 ﻿using BLC;
 using BLC.LoginComponent;
+using BLC.ProfileComponent;
 using Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,10 @@ namespace ClientSpaceCoreApi.Controllers
     public class AuthenticateController : ControllerBase
     {
         private readonly BusinessLogicLogin _blc;
+        private readonly BusinessLogicProfile _blcProfile;
         public AuthenticateController(IHttpContextAccessor _contextAccessor) {
             _blc = new BusinessLogicLogin(_contextAccessor);
+            _blcProfile = new BusinessLogicProfile(_contextAccessor);
         }
         [HttpGet("check-credentials")]
         public IActionResult Check_Credentials(CredentialsDto credentials)
@@ -56,5 +59,22 @@ namespace ClientSpaceCoreApi.Controllers
 
             return Ok( new { IsAuthenticated, IsFirstLogin, oServerResponse });
         }
+
+        [HttpGet("get-user")]
+        public IActionResult GetUser(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        {
+            CredentialsDto credentials = new CredentialsDto()
+            {
+                Username = i__UserName,
+                Password = i__Password,
+                ClientType = i__ClientType,
+                IsFirstLogin = i__IsFirstLogin,
+                SessionID = sessionId
+            };
+
+            _blcProfile.DQ_GetUserAccount(credentials);
+            return Ok();
+        }
+
     }
 }
