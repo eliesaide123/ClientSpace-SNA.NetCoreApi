@@ -68,7 +68,7 @@ namespace ClientSpaceCoreApi.Controllers
                 Password = i__Password,
                 ClientType = i__ClientType,
                 IsFirstLogin = i__IsFirstLogin,
-                SessionID = sessionId
+                SessionID = sessionId   
             };
 
             var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
@@ -78,5 +78,12 @@ namespace ClientSpaceCoreApi.Controllers
             return Ok(new { userAccount, questions });
         }
 
+        [HttpGet("get-client-info")]
+        public IActionResult GetClientInfo(string sessionId, string roleId)
+        {
+            var responseObject = _blcProfile.DQ_GetClientInfo(sessionId, roleId);
+           
+            return Ok();
+        }
     }
 }
