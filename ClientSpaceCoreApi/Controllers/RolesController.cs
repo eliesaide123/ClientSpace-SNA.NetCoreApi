@@ -31,8 +31,10 @@ namespace ClientSpaceCoreApi.Controllers
             };
 
             var response = _blcRoles.DQ_CheckRoles(credentials);
-            var isErrors = JsonConvert.DeserializeObject<bool>(response);
-            return Ok(isErrors);
+            var isError = JsonConvert.DeserializeObject(response);
+
+            var setRoleResponse = _blcRoles.SetRole(sessionId, "PH");
+            return Ok(isError);
         }
     }
 }

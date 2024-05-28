@@ -60,15 +60,15 @@ namespace ClientSpaceCoreApi.Controllers
         }
 
         [HttpGet("get-user")]
-        public IActionResult GetUser(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        public IActionResult GetUser(string username, string password, string clientType, bool isFirstLogin, string sessionID)
         {
             CredentialsDto credentials = new CredentialsDto()
             {
-                Username = i__UserName,
-                Password = i__Password,
-                ClientType = i__ClientType,
-                IsFirstLogin = i__IsFirstLogin,
-                SessionID = sessionId   
+                Username = username,
+                Password = password,
+                ClientType = clientType,
+                IsFirstLogin = isFirstLogin,
+                SessionID = sessionID   
             };
 
             var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
@@ -81,9 +81,9 @@ namespace ClientSpaceCoreApi.Controllers
         [HttpGet("get-client-info")]
         public IActionResult GetClientInfo(string sessionId, string roleId)
         {
-            var responseObject = _blcProfile.DQ_GetClientInfo(sessionId, roleId);
+            var responseObject = JsonConvert.DeserializeObject<GetClientInfoResponseDto>(_blcProfile.DQ_GetClientInfo(sessionId, roleId));
            
-            return Ok();
+            return Ok(responseObject);
         }
     }
 }
