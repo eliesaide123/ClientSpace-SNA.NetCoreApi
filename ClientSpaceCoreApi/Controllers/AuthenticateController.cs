@@ -20,26 +20,17 @@ namespace ClientSpaceCoreApi.Controllers
             _blc = new BusinessLogicLogin(_contextAccessor);
             _blcProfile = new BusinessLogicProfile(_contextAccessor);
         }
-        [HttpGet("check-credentials")]
-        public IActionResult Check_Credentials(CredentialsDto credentials)
+        [HttpPost("check-credentials")]
+        public IActionResult Check_Credentials([FromBody] CredentialsDto credentials)
         {
             
             var response = _blc.Authenticate(credentials);
             return Ok(new { response });
         }
 
-        [HttpGet("login-user")]
-        public IActionResult LoginUser(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        [HttpPost("login-user")]
+        public IActionResult LoginUser([FromBody] CredentialsDto credentials)
         {
-            
-            CredentialsDto credentials = new CredentialsDto()
-            {
-                Username = i__UserName,
-                Password = i__Password,
-                ClientType = i__ClientType,
-                IsFirstLogin = i__IsFirstLogin,
-                SessionID = sessionId
-            };
             var result = Check_Credentials(credentials) as OkObjectResult;
             if (result == null || result.Value == null)
             {
@@ -59,17 +50,9 @@ namespace ClientSpaceCoreApi.Controllers
             return Ok( new { user , oServerResponse });
         }
 
-        [HttpGet("get-user")]
-        public IActionResult GetUser(string username, string password, string clientType, bool isFirstLogin, string sessionID)
+        [HttpPost("get-user")]
+        public IActionResult GetUser([FromBody] CredentialsDto credentials)
         {
-            CredentialsDto credentials = new CredentialsDto()
-            {
-                Username = username,
-                Password = password,
-                ClientType = clientType,
-                IsFirstLogin = isFirstLogin,
-                SessionID = sessionID   
-            };
 
             var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
             var data = JsonConvert.DeserializeObject<GetUserAccountResponse>(responseObject);
@@ -78,10 +61,10 @@ namespace ClientSpaceCoreApi.Controllers
             return Ok(new { userAccount, questions });
         }
 
-        [HttpGet("get-client-info")]
-        public IActionResult GetClientInfo(string sessionId, string roleId)
+        [HttpPost("get-client-info")]
+        public IActionResult GetClientInfo([FromBody] DoOpMainParams parameters)
         {
-            var responseObject = JsonConvert.DeserializeObject<GetClientInfoResponseDto>(_blcProfile.DQ_GetClientInfo(sessionId, roleId));
+            var responseObject = JsonConvert.DeserializeObject<GetClientInfoResponseDto>(_blcProfile.DQ_GetClientInfo(parameters));
            
             return Ok(responseObject);
         }

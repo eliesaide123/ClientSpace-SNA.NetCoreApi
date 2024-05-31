@@ -18,22 +18,13 @@ namespace ClientSpaceCoreApi.Controllers
             _blcRoles = new BusinessLogicRoles(_contextAccessor);
         }
 
-            [HttpGet("check-roles")]
-        public IActionResult Check_Roles(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+            [HttpPost("check-roles")]
+        public IActionResult Check_Roles([FromBody] DoOpMainParams parameters)
         {
-            CredentialsDto credentials = new CredentialsDto()
-            {
-                Username = i__UserName,
-                Password = i__Password,
-                ClientType = i__ClientType,
-                IsFirstLogin = i__IsFirstLogin,
-                SessionID = sessionId
-            };
-
-            var response = _blcRoles.DQ_CheckRoles(credentials);
+            var response = _blcRoles.DQ_CheckRoles(parameters.Credentials);
             var isError = JsonConvert.DeserializeObject(response);
 
-            var setRoleResponse = _blcRoles.SetRole(sessionId, "PH");
+            var setRoleResponse = _blcRoles.SetRole(parameters.Credentials.SessionID, parameters.RoleID);
             return Ok(isError);
         }
     }
