@@ -1,8 +1,12 @@
 ﻿using BLC;
+using BLC.LoginComponent;
+using BLC.ProfileComponent;
 using Entities;
+using Entities.JSONResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Specialized;
 
 namespace ClientSpaceCoreApi.Controllers
 {
@@ -10,24 +14,76 @@ namespace ClientSpaceCoreApi.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly BusinessLogic _blc;
-        public AuthenticateController() {
-            _blc = new BusinessLogic();
+        private readonly BusinessLogicLogin _blc;
+        private readonly BusinessLogicProfile _blcProfile;
+        public AuthenticateController(IHttpContextAccessor _contextAccessor) {
+            _blc = new BusinessLogicLogin(_contextAccessor);
+            _blcProfile = new BusinessLogicProfile(_contextAccessor);
         }
         [HttpGet("check-credentials")]
-        public IActionResult Check_Credentials(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        public IActionResult Check_Credentials(CredentialsDto credentials)
         {
+            
+            var response = _blc.Authenticate(credentials);
+            return Ok(new { response });
+        }
+
+        [HttpGet("login-user")]
+        public IActionResult LoginUser(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        {
+            
             CredentialsDto credentials = new CredentialsDto()
             {
                 Username = i__UserName,
                 Password = i__Password,
-                ClientType = i__ClientType,                
+                ClientType = i__ClientType,
                 IsFirstLogin = i__IsFirstLogin,
                 SessionID = sessionId
             };
-            var response = _blc.Authenticate(credentials);
-            var IsAuthenticated = response.IsAuthenticated;
-            return Ok(new { IsAuthenticated });
+            var result = Check_Credentials(credentials) as OkObjectResult;
+            if (result == null || result.Value == null)
+            {
+                return BadRequest("Invalid credentials response");
+            }
+
+            var responseData = result.Value;
+            var jsonResponse = JsonConvert.SerializeObject(responseData);
+            var responseObject = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
+            var response = responseObject.response;
+
+            var user = JsonConvert.DeserializeObject<CredentialsDto>(response.ToString());
+
+            var loginResponse = _blc.IsFirstLogin(user) as NameValueCollection;
+            Dictionary<string, string> oServerResponse = loginResponse.AllKeys.ToDictionary(key => key, key => loginResponse[key]);
+
+            return Ok( new { user , oServerResponse });
+        }
+
+        [HttpGet("get-user")]
+        public IActionResult GetUser(string username, string password, string clientType, bool isFirstLogin, string sessionID)
+        {
+            CredentialsDto credentials = new CredentialsDto()
+            {
+                Username = username,
+                Password = password,
+                ClientType = clientType,
+                IsFirstLogin = isFirstLogin,
+                SessionID = sessionID   
+            };
+
+            var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
+            var data = JsonConvert.DeserializeObject<GetUserAccountResponse>(responseObject);
+            var userAccount = data.UserAccount;
+            var questions = data.Questions;
+            return Ok(new { userAccount, questions });
+        }
+
+        [HttpGet("get-client-info")]
+        public IActionResult GetClientInfo(string sessionId, string roleId)
+        {
+            var responseObject = JsonConvert.DeserializeObject<GetClientInfoResponseDto>(_blcProfile.DQ_GetClientInfo(sessionId, roleId));
+           
+            return Ok(responseObject);
         }
     }
 }
