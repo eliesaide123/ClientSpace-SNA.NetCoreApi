@@ -1,6 +1,7 @@
 ﻿using BLC.PolicyComponent;
 using BLC.RolesComponent;
 using Entities;
+using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace ClientSpaceCoreApi.Controllers
         }
 
         [HttpPost("get-policy-details")]
-        public IActionResult GetPolicyDetails([FromBody]DoOpMainParams paramters) {
+        public ActionResult<GetPolicyDetailsResponse> GetPolicyDetails([FromBody]DoOpMainParams paramters) {
 
             var response = _blcPolicy.DQ_GetPIPolicyDetails(paramters);
             return Ok(response);

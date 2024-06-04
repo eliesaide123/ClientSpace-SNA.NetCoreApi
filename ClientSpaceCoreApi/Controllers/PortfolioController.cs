@@ -1,5 +1,6 @@
 ﻿using BLC.ProfileComponent;
 using Entities;
+using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,7 +17,7 @@ namespace ClientSpaceCoreApi.Controllers
         }
 
         [HttpPost("get-portfolio")]
-        public IActionResult GetPortolio([FromBody] DoOpMainParams parameters)
+        public ActionResult<GetPortfolioResponse> GetPortolio([FromBody] DoOpMainParams parameters)
         {
             var response = _blcProfile.GetPortfolio(parameters);
             return Ok(response);

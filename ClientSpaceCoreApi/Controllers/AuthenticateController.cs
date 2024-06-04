@@ -26,9 +26,9 @@ namespace ClientSpaceCoreApi.Controllers
         public ActionResult<LoginUserResponse> LoginUser([FromBody] CredentialsDto credentials)
         {
             var user = _blc.Authenticate(credentials);
-            var errors_Response = _blc.IsFirstLogin(user) as Dictionary<string,string>;
+            var login_Response = _blc.IsFirstLogin(user) as LoginUserResponse;
 
-            return Ok( new { user, errors_Response });
+            return Ok(login_Response);
         }
 
         [HttpPost("get-user")]
