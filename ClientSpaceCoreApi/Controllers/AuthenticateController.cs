@@ -2,6 +2,7 @@
 using BLC.LoginComponent;
 using BLC.ProfileComponent;
 using Entities;
+using Entities.IActionResponseDTOs;
 using Entities.JSONResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,34 +21,14 @@ namespace ClientSpaceCoreApi.Controllers
             _blc = new BusinessLogicLogin(_contextAccessor);
             _blcProfile = new BusinessLogicProfile(_contextAccessor);
         }
-        [HttpPost("check-credentials")]
-        public IActionResult Check_Credentials([FromBody] CredentialsDto credentials)
-        {
-            
-            var response = _blc.Authenticate(credentials);
-            return Ok(new { response });
-        }
 
         [HttpPost("login-user")]
-        public IActionResult LoginUser([FromBody] CredentialsDto credentials)
+        public ActionResult<LoginUserResponse> LoginUser([FromBody] CredentialsDto credentials)
         {
-            var result = Check_Credentials(credentials) as OkObjectResult;
-            if (result == null || result.Value == null)
-            {
-                return BadRequest("Invalid credentials response");
-            }
+            var user = _blc.Authenticate(credentials);
+            var errors_Response = _blc.IsFirstLogin(user) as Dictionary<string,string>;
 
-            var responseData = result.Value;
-            var jsonResponse = JsonConvert.SerializeObject(responseData);
-            var responseObject = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
-            var response = responseObject.response;
-
-            var user = JsonConvert.DeserializeObject<CredentialsDto>(response.ToString());
-
-            var loginResponse = _blc.IsFirstLogin(user) as NameValueCollection;
-            Dictionary<string, string> oServerResponse = loginResponse.AllKeys.ToDictionary(key => key, key => loginResponse[key]);
-
-            return Ok( new { user , oServerResponse });
+            return Ok( new { user, errors_Response });
         }
 
         [HttpPost("get-user")]
@@ -56,9 +37,7 @@ namespace ClientSpaceCoreApi.Controllers
 
             var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
             var data = JsonConvert.DeserializeObject<GetUserAccountResponse>(responseObject);
-            var userAccount = data.UserAccount;
-            var questions = data.Questions;
-            return Ok(new { userAccount, questions });
+            return Ok(data);
         }
 
         [HttpPost("get-client-info")]
