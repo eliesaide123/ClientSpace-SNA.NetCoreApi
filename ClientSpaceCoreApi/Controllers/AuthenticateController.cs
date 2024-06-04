@@ -3,7 +3,6 @@ using BLC.LoginComponent;
 using BLC.ProfileComponent;
 using Entities;
 using Entities.IActionResponseDTOs;
-using Entities.JSONResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -32,18 +31,17 @@ namespace ClientSpaceCoreApi.Controllers
         }
 
         [HttpPost("get-user")]
-        public IActionResult GetUser([FromBody] CredentialsDto credentials)
+        public ActionResult<GetUserAccountResponse> GetUser([FromBody] CredentialsDto credentials)
         {
 
-            var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
-            var data = JsonConvert.DeserializeObject<GetUserAccountResponse>(responseObject);
+            var data = _blcProfile.DQ_GetUserAccount(credentials);
             return Ok(data);
         }
 
         [HttpPost("get-client-info")]
-        public IActionResult GetClientInfo([FromBody] DoOpMainParams parameters)
+        public ActionResult<GetClientInfoResponse> GetClientInfo([FromBody] DoOpMainParams parameters)
         {
-            var responseObject = JsonConvert.DeserializeObject<GetClientInfoResponseDto>(_blcProfile.DQ_GetClientInfo(parameters));
+            var responseObject = _blcProfile.DQ_GetClientInfo(parameters);
            
             return Ok(responseObject);
         }
