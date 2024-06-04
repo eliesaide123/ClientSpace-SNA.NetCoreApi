@@ -1,4 +1,6 @@
 ﻿using BLC.ProfileComponent;
+using Entities;
+using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,10 +16,10 @@ namespace ClientSpaceCoreApi.Controllers
             _blcProfile = new BusinessLogicProfile(contextAccessor);
         }
 
-        [HttpGet("get-portfolio")]
-        public IActionResult GetPortolio(string sessionId, int gridSize, string direction, string roleId)
+        [HttpPost("get-portfolio")]
+        public ActionResult<GetPortfolioResponse> GetPortolio([FromBody] DoOpMainParams parameters)
         {
-            var response = _blcProfile.GetPortfolio(sessionId, gridSize, direction, roleId);
+            var response = _blcProfile.GetPortfolio(parameters);
             return Ok(response);
         }
     }

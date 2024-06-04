@@ -2,7 +2,7 @@
 using BLC.LoginComponent;
 using BLC.ProfileComponent;
 using Entities;
-using Entities.JSONResponseDTOs;
+using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -20,68 +20,28 @@ namespace ClientSpaceCoreApi.Controllers
             _blc = new BusinessLogicLogin(_contextAccessor);
             _blcProfile = new BusinessLogicProfile(_contextAccessor);
         }
-        [HttpGet("check-credentials")]
-        public IActionResult Check_Credentials(CredentialsDto credentials)
+
+        [HttpPost("login-user")]
+        public ActionResult<LoginUserResponse> LoginUser([FromBody] CredentialsDto credentials)
         {
-            
-            var response = _blc.Authenticate(credentials);
-            return Ok(new { response });
+            var user = _blc.Authenticate(credentials);
+            var login_Response = _blc.IsFirstLogin(user) as LoginUserResponse;
+
+            return Ok(login_Response);
         }
 
-        [HttpGet("login-user")]
-        public IActionResult LoginUser(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+        [HttpPost("get-user")]
+        public ActionResult<GetUserAccountResponse> GetUser([FromBody] CredentialsDto credentials)
         {
-            
-            CredentialsDto credentials = new CredentialsDto()
-            {
-                Username = i__UserName,
-                Password = i__Password,
-                ClientType = i__ClientType,
-                IsFirstLogin = i__IsFirstLogin,
-                SessionID = sessionId
-            };
-            var result = Check_Credentials(credentials) as OkObjectResult;
-            if (result == null || result.Value == null)
-            {
-                return BadRequest("Invalid credentials response");
-            }
 
-            var responseData = result.Value;
-            var jsonResponse = JsonConvert.SerializeObject(responseData);
-            var responseObject = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
-            var response = responseObject.response;
-
-            var user = JsonConvert.DeserializeObject<CredentialsDto>(response.ToString());
-
-            var loginResponse = _blc.IsFirstLogin(user) as NameValueCollection;
-            Dictionary<string, string> oServerResponse = loginResponse.AllKeys.ToDictionary(key => key, key => loginResponse[key]);
-
-            return Ok( new { user , oServerResponse });
+            var data = _blcProfile.DQ_GetUserAccount(credentials);
+            return Ok(data);
         }
 
-        [HttpGet("get-user")]
-        public IActionResult GetUser(string username, string password, string clientType, bool isFirstLogin, string sessionID)
+        [HttpPost("get-client-info")]
+        public ActionResult<GetClientInfoResponse> GetClientInfo([FromBody] DoOpMainParams parameters)
         {
-            CredentialsDto credentials = new CredentialsDto()
-            {
-                Username = username,
-                Password = password,
-                ClientType = clientType,
-                IsFirstLogin = isFirstLogin,
-                SessionID = sessionID   
-            };
-
-            var responseObject = _blcProfile.DQ_GetUserAccount(credentials);
-            var data = JsonConvert.DeserializeObject<GetUserAccountResponse>(responseObject);
-            var userAccount = data.UserAccount;
-            var questions = data.Questions;
-            return Ok(new { userAccount, questions });
-        }
-
-        [HttpGet("get-client-info")]
-        public IActionResult GetClientInfo(string sessionId, string roleId)
-        {
-            var responseObject = JsonConvert.DeserializeObject<GetClientInfoResponseDto>(_blcProfile.DQ_GetClientInfo(sessionId, roleId));
+            var responseObject = _blcProfile.DQ_GetClientInfo(parameters);
            
             return Ok(responseObject);
         }

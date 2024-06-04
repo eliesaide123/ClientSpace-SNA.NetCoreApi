@@ -1,8 +1,10 @@
 ﻿using BLC.LoginComponent;
 using BLC.RolesComponent;
 using Entities;
+using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -18,23 +20,13 @@ namespace ClientSpaceCoreApi.Controllers
             _blcRoles = new BusinessLogicRoles(_contextAccessor);
         }
 
-            [HttpGet("check-roles")]
-        public IActionResult Check_Roles(string i__UserName, string i__Password, string i__ClientType, bool i__IsFirstLogin, string sessionId)
+            [HttpPost("check-roles")]
+        public ActionResult<CheckRolesResponse> Check_Roles([FromBody] DoOpMainParams parameters)
         {
-            CredentialsDto credentials = new CredentialsDto()
-            {
-                Username = i__UserName,
-                Password = i__Password,
-                ClientType = i__ClientType,
-                IsFirstLogin = i__IsFirstLogin,
-                SessionID = sessionId
-            };
+            var response = _blcRoles.DQ_CheckRoles(parameters.Credentials);
 
-            var response = _blcRoles.DQ_CheckRoles(credentials);
-            var isError = JsonConvert.DeserializeObject(response);
-
-            var setRoleResponse = _blcRoles.SetRole(sessionId, "PH");
-            return Ok(isError);
+            _blcRoles.SetRole(parameters.Credentials.SessionID, parameters.RoleID);
+            return Ok(response);
         }
     }
 }
