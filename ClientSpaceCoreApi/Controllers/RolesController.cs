@@ -21,11 +21,11 @@ namespace ClientSpaceCoreApi.Controllers
         }
 
             [HttpPost("check-roles")]
-        public ActionResult<CheckRolesResponse> Check_Roles([FromBody] DoOpMainParams parameters)
+        public ActionResult<CheckRolesResponse> Check_Roles([FromBody] CredentialsDto credentials)
         {
-            var response = _blcRoles.DQ_CheckRoles(parameters.Credentials);
+            var response = _blcRoles.DQ_CheckRoles(credentials) as CheckRolesResponse;
 
-            _blcRoles.SetRole(parameters.Credentials.SessionID, parameters.RoleID);
+            _blcRoles.SetRole(credentials.SessionID, response?.SUCCESS.RoleID);
             return Ok(response);
         }
     }
