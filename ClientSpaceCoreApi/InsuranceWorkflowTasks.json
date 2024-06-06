@@ -1,0 +1,759 @@
+{
+  "TASKS": {
+
+    "DQWebAuthentication": {
+
+      "PARAMS": [
+        {
+          "Name": "TASK_NAME",
+          "Value": "DQWebAuthentication",
+          "Type": ""
+        },
+        {
+          "Name": "CONVERTER_NAME",
+          "Value": "Conv_DQWebAuthentication",
+          "Type": ""
+        }
+      ],
+      "Tables": {
+        "Credentials": [
+          {
+            "ColumnName": "User_ID",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Password",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "ClientType",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "SessionID",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "IsAuthenticated",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "StationNo",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "IsFirstLogin",
+            "ColumnDataType": "System.Boolean"
+          }
+        ]
+      }
+    },
+
+    "CheckRoles": {
+      "PARAMS": [
+        {
+          "Name": "TASK_NAME",
+          "Value": "CheckRoles",
+          "Type": ""
+        },
+        {
+          "Name": "CONVERTER_NAME",
+          "Value": "",
+          "Type": ""
+        },
+        {
+          "Name": "ROLEID",
+          "Value": "MR",
+          "Type": ""
+        },
+        {
+          "Name": "PAGE_MODE",
+          "Value": "REAL",
+          "Type": ""
+        }
+      ],
+      "Tables": {
+        "Codes": [
+          {
+            "ColumnName": "Tbl_Name",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Eng_Full",
+            "ColumnDataType": "System.String"
+          }
+        ]
+      }
+    },
+
+    "SetRoles": {
+      "PARAMS": [
+        {
+          "Name": "TASK_NAME",
+          "Value": "SetRoles",
+          "Type": ""
+        },
+        {
+          "Name": "CONVERTER_NAME",
+          "Value": "",
+          "Type": ""
+        },
+        {
+          "Name": "PAGE_MODE",
+          "Value": "REAL",
+          "Type": ""
+        }
+      ],
+      "Tables": {
+        "VARIABLES": [
+          {
+            "ColumnName": "ATTRIBUTE",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "STR_VALUE",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "VAL_FORMAT",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "VAR_TYPE",
+            "ColumnDataType": "System.String"
+          }
+        ]
+      }
+    },
+
+    "GetUserAccount": {
+      "PARAMS": [
+        {
+          "Name": "TASK_NAME",
+          "Value": "GetUserAccount",
+          "Type": ""
+        },
+        {
+          "Name": "CONVERTER_NAME",
+          "Value": "",
+          "Type": ""
+        },
+        {
+          "Name": "PAGE_MODE",
+          "Value": "REAL",
+          "Type": ""
+        }
+      ],
+
+      "Tables": {
+        "TPIDENT": [
+          {
+            "ColumnName": "TP-UserId",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-Mobile",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-UserName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-Email",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-UserLang",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-ContactScenario",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-Pwd",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-RegType",
+            "ColumnDataType": "System.String"
+          }
+        ],
+
+        "TPVALIDSET": [
+          {
+            "ColumnName": "TP-Question",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "TP-Answer",
+            "ColumnDataType": "System.String"
+          }
+        ],
+        "Codes": [
+          {
+            "ColumnName": "Tbl_Name",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Eng_Full",
+            "ColumnDataType": "System.String"
+          }
+        ]
+      }
+    },
+
+    "GetClientInfo": {
+      "PARAMS": [
+
+        {
+          "Name": "TASK_NAME",
+          "Value": "GetClientInfo",
+          "Type": ""
+        },
+        {
+          "Name": "PAGE_MODE",
+          "Value": "REAL",
+          "Type": ""
+        },
+        {
+          "Name": "OnlineSales",
+          "Value": "",
+          "Type": "O"
+        },
+        {
+          "Name": "OnlineAgt",
+          "Value": "",
+          "Type": "O"
+        },
+        {
+          "Name": "AgtCode",
+          "Value": "",
+          "Type": "O"
+        },
+        {
+          "Name": "CONVERTER_NAME",
+          "Value": "Conv_GetClientInfo",
+          "Type": ""
+        }
+
+      ],
+      "Tables": {
+        "Persons": [
+          {
+            "ColumnName": "PIN",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "Age",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Marital",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Per_Title",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "FirstName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Father",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Family",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "FullName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Profession",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Address",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "EntityType",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "DOB_Day",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "DOB_Month",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "DOB_Year",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "HasRequest",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "HasUnpaid",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "HasClaims",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "HasRenewal",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "HasFresh",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "KYC",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "ShowProfile",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "ShowMissing",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "AgentSOA",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "RPSEnabled",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "YearMonth",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "KYCMSG",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "CONVERT_DATA",
+            "ColumnDataType": "System.String"
+          }
+        ],
+        "Product": [
+          {
+            "ColumnName": "Product",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Prod_Desc",
+            "ColumnDataType": "System.String"
+          }
+        ],
+
+        "Codes": [
+          {
+            "ColumnName": "Code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Eng_Full",
+            "ColumnDataType": "System.String"
+          }
+        ]
+      }
+    },
+
+    "GetPortfolio": {
+      "PARAMS": [
+        {
+          "Name": "TASK_NAME",
+          "Value": "GetPortfolio",
+          "Type": ""
+        },
+        {
+          "Name": "CONVERTER_NAME",
+          "Value": "Conv_GetPortfolio",
+          "Type": ""
+        },
+        {
+          "Name": "CATEGORY",
+          "Value": "-ALL-",
+          "Type": "Q"
+        },
+        {
+          "Name": "PRODUCT",
+          "Value": "-ALL-",
+          "Type": "Q"
+        },
+        {
+          "Name": "INFORCEONLY",
+          "Value": "True",
+          "Type": "Q"
+        },
+        {
+          "Name": "POLICYNO",
+          "Value": "",
+          "Type": "Q"
+        },
+        {
+          "Name": "PAGING_DIRECTION",
+          "Value": "",
+          "Type": "O"
+        },
+        {
+          "Name": "HolderLabel",
+          "Value": "",
+          "Type": "O"
+        }
+      ],
+
+      "Tables": {
+        "Polcom": [
+          {
+            "ColumnName": "Pol_serno",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "PolicyType",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PolicyNo",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "ProductName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "HolderName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Inception",
+            "ColumnDataType": "System.DateTime"
+          },
+          {
+            "ColumnName": "Expiry",
+            "ColumnDataType": "System.DateTime"
+          },
+          {
+            "ColumnName": "Status_Code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "OrderBy",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "CertNo",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "pay_frq",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Total_Premium",
+            "ColumnDataType": "System.Decimal"
+          },
+          {
+            "ColumnName": "Cur_Code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Tabs",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Template",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "AsAgreed",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "HasRequest",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "HasFresh",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "Disable_View",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "OpenCover",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "CONVERT_DATA",
+            "ColumnDataType": "System.String"
+          }
+        ]
+
+      }
+    },
+
+    "GetPIPolicyDetails": {
+      "PARAMS": [
+        {
+          "Name": "TASK_NAME",
+          "Value": "GetPIPolicyDetails",
+          "Type": ""
+        },
+        {
+          "Name": "FundPerfPrefix",
+          "Value": "",
+          "Type": "O"
+        },
+        {
+          "Name": "CertNo",
+          "Value": "0",
+          "Type": "Q"
+        },
+        {
+          "Name": "CONVERTER_NAME",
+          "Value": "Conv_GetPIPolicyDetails",
+          "Type": ""
+        }
+      ],
+      "Tables": {
+        "Polcom": [
+          {
+            "ColumnName": "Product",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "GrpCode",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Pol_serno",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "HolderName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "ProductName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "InsPIN",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "PolicyNo",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Policy_No",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "Agt_code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "FirstInception",
+            "ColumnDataType": "System.DateTime"
+          },
+          {
+            "ColumnName": "Inception",
+            "ColumnDataType": "System.DateTime"
+          },
+          {
+            "ColumnName": "expiry",
+            "ColumnDataType": "System.DateTime"
+          },
+          {
+            "ColumnName": "ClaimDetail",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "ClaimPrevYears",
+            "ColumnDataType": "System.Int32"
+          },
+          {
+            "ColumnName": "Net_Frq",
+            "ColumnDataType": "System.Decimal"
+          },
+          {
+            "ColumnName": "cur_code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Pay_Mode",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Pay_Frq",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "ContractYr",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "ContractPrd",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PaymentYr",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PaymentPrd",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PaymentExpiry",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "ContractLabel",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PaymentLabel",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Status_code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Agt_Phone",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Agt_Email",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "FirstLifeInsured",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "SecondLifeInsured",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "FirstInsLbl",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "SecondInsLbl",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "CreditCardNo",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "CardExpiry",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "BAS-Policy",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "POS-Policy",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PayerName",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "CreditCardlbl",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "LegalAddress",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "GCondRef",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PolLang",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "SendSms",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PH_Phone",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PH_eMail",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PolicyYr",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "PrintCS",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "GrpPolicy",
+            "ColumnDataType": "System.Boolean"
+          },
+          {
+            "ColumnName": "CONVERT_DATA",
+            "ColumnDataType": "System.String"
+          }
+        ],
+        "Codes": [
+          {
+            "ColumnName": "Tbl_Name",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Code",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Eng_Full",
+            "ColumnDataType": "System.String"
+          },
+          {
+            "ColumnName": "Repl_With",
+            "ColumnDataType": "System.String"
+          }
+        ]
+      }
+    }
+  }
+}

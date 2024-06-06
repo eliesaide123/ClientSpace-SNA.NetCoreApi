@@ -19,7 +19,7 @@ namespace ClientSpaceCoreApi.Controllers
         [HttpPost("get-portfolio")]
         public ActionResult<GetPortfolioResponse> GetPortolio([FromBody] DoOpMainParams parameters)
         {
-            var response = _blcProfile.GetPortfolio(parameters);
+            var response = _blcProfile.DQ_GetPortfolio(parameters);
             return Ok(response);
         }
     }
