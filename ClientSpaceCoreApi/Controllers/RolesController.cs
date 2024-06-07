@@ -25,7 +25,10 @@ namespace ClientSpaceCoreApi.Controllers
         {
             var response = _blcRoles.DQ_CheckRoles(credentials) as CheckRolesResponse;
 
-            _blcRoles.SetRole(credentials.SessionID, response?.SUCCESS.RoleID);
+            if (response?.SUCCESS != null)
+            {
+                _blcRoles.SetRole(credentials.SessionID, response.SUCCESS.RoleID);
+            }
             return Ok(response);
         }
     }
