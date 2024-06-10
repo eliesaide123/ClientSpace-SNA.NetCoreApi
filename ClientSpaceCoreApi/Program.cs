@@ -1,4 +1,5 @@
-
+using ClientSpaceCoreApi.Mappers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.IISIntegration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,9 @@ builder.Services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(ClassMappers));
+
+MapperConfigurationSetup.Configure();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using BLC.LoginComponent;
+﻿using AutoMapper;
+using BLC.LoginComponent;
 using BLC.RolesComponent;
 using Entities;
 using Entities.IActionResponseDTOs;
@@ -15,9 +16,9 @@ namespace ClientSpaceCoreApi.Controllers
     public class RolesController : ControllerBase
     {
         private readonly BusinessLogicRoles _blcRoles;
-        public RolesController(IHttpContextAccessor _contextAccessor)
+        public RolesController(IHttpContextAccessor _contextAccessor, IMapper _mapper)
         {
-            _blcRoles = new BusinessLogicRoles(_contextAccessor);
+            _blcRoles = new BusinessLogicRoles(_contextAccessor, _mapper);
         }
 
             [HttpPost("check-roles")]

@@ -1,4 +1,5 @@
-﻿using BLC;
+﻿using AutoMapper;
+using BLC;
 using BLC.LoginComponent;
 using BLC.ProfileComponent;
 using Entities;
@@ -16,16 +17,15 @@ namespace ClientSpaceCoreApi.Controllers
     {
         private readonly BusinessLogicLogin _blc;
         private readonly BusinessLogicProfile _blcProfile;
-        public AuthenticateController(IHttpContextAccessor _contextAccessor) {
-            _blc = new BusinessLogicLogin(_contextAccessor);
+        public AuthenticateController(IHttpContextAccessor _contextAccessor, IMapper _mapper) {
+            _blc = new BusinessLogicLogin(_contextAccessor, _mapper);
             _blcProfile = new BusinessLogicProfile(_contextAccessor);
         }
 
         [HttpPost("login-user")]
         public ActionResult<LoginUserResponse> LoginUser([FromBody] CredentialsDto credentials)
         {
-            var user = _blc.Authenticate(credentials);
-            var login_Response = _blc.IsFirstLogin(user) as LoginUserResponse;
+            var login_Response = _blc.Authenticate(credentials);
 
             return Ok(login_Response);
         }

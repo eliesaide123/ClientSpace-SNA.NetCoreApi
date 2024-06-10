@@ -106,6 +106,11 @@
           "Name": "PAGE_MODE",
           "Value": "REAL",
           "Type": ""
+        },
+        {
+          "Name": "ROLEID",
+          "Value": "Fill_RoleID",
+          "Type": "Q"
         }
       ],
       "Tables": {
@@ -224,6 +229,11 @@
           "Name": "PAGE_MODE",
           "Value": "REAL",
           "Type": ""
+        },
+        {
+          "Name": "ROLEID",
+          "Value": "Fill_RoleID",
+          "Type": "Q"
         },
         {
           "Name": "OnlineSales",
@@ -415,8 +425,23 @@
           "Type": "Q"
         },
         {
-          "Name": "PAGING_DIRECTION",
-          "Value": "",
+          "Name": "ROLEID",
+          "Value": "Fill_RoleID",
+          "Type": "Q"
+        },
+        {
+          "Name": "PAGING_START_INDEX",
+          "Value": "Fill_StartIndex",
+          "Type": "Q"
+        },
+        {
+          "Name": "PAGING_PAGE_SIZE",
+          "Value": "Fill_GridSize",
+          "Type": "Q"
+        },
+        {
+          "Name": "PAGING_ACTION",
+          "Value": "Fill_Direction",
           "Type": "O"
         },
         {
@@ -532,6 +557,16 @@
         {
           "Name": "CertNo",
           "Value": "0",
+          "Type": "Q"
+        },
+        {
+          "Name": "ROLEID",
+          "Value": "Fill_RoleID",
+          "Type": "Q"
+        },
+        {
+          "Name": "PolSerNo",
+          "Value": "Fill_PolSerNo",
           "Type": "Q"
         },
         {
