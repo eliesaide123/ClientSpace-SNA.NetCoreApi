@@ -1,4 +1,5 @@
-﻿using BLC.ProfileComponent;
+﻿using AutoMapper;
+using BLC.ProfileComponent;
 using Entities;
 using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
@@ -12,8 +13,8 @@ namespace ClientSpaceCoreApi.Controllers
     public class PortfolioController : ControllerBase
     {
         private readonly BusinessLogicProfile _blcProfile;
-        public PortfolioController(IHttpContextAccessor contextAccessor) {
-            _blcProfile = new BusinessLogicProfile(contextAccessor);
+        public PortfolioController(IHttpContextAccessor contextAccessor, IMapper mapper) {
+            _blcProfile = new BusinessLogicProfile(contextAccessor, mapper);
         }
 
         [HttpPost("get-portfolio")]

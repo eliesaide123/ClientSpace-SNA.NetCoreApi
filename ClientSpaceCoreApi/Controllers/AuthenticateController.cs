@@ -19,7 +19,7 @@ namespace ClientSpaceCoreApi.Controllers
         private readonly BusinessLogicProfile _blcProfile;
         public AuthenticateController(IHttpContextAccessor _contextAccessor, IMapper _mapper) {
             _blc = new BusinessLogicLogin(_contextAccessor, _mapper);
-            _blcProfile = new BusinessLogicProfile(_contextAccessor);
+            _blcProfile = new BusinessLogicProfile(_contextAccessor, _mapper);
         }
 
         [HttpPost("login-user")]
