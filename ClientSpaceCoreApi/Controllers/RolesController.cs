@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLC.LoginComponent;
 using BLC.RolesComponent;
+using DAL.RolesComponent;
 using Entities;
 using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
@@ -16,9 +17,9 @@ namespace ClientSpaceCoreApi.Controllers
     public class RolesController : ControllerBase
     {
         private readonly BusinessLogicRoles _blcRoles;
-        public RolesController(IHttpContextAccessor _contextAccessor, IMapper _mapper)
+        public RolesController(IHttpContextAccessor _contextAccessor, IMapper _mapper, IRolesDAL DAL)
         {
-            _blcRoles = new BusinessLogicRoles(_contextAccessor, _mapper);
+            _blcRoles = new BusinessLogicRoles(_contextAccessor, _mapper, DAL);
         }
 
             [HttpPost("check-roles")]

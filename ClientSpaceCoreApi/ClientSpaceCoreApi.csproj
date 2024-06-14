@@ -31,6 +31,9 @@
     <Reference Include="BLC">
       <HintPath>..\..\ClientSpace--ClassLibrary-SNA\CS\BLC\bin\Debug\net8.0\BLC.dll</HintPath>
     </Reference>
+    <Reference Include="DAL">
+      <HintPath>..\..\ClientSpace--ClassLibrary-SNA\CS\DAL\bin\Debug\net8.0\DAL.dll</HintPath>
+    </Reference>
     <Reference Include="Entities">
       <HintPath>..\..\ClientSpace--ClassLibrary-SNA\CS\Entities\bin\Debug\net8.0\Entities.dll</HintPath>
     </Reference>
