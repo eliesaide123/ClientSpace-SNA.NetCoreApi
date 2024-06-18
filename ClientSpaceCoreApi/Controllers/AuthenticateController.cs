@@ -23,6 +23,7 @@ namespace ClientSpaceCoreApi.Controllers
             _blcProfile = new BusinessLogicProfile(_contextAccessor, _mapper);
         }
 
+        //test
         [HttpPost("login-user")]
         public ActionResult<LoginUserResponse> LoginUser([FromBody] CredentialsDto credentials)
         {
