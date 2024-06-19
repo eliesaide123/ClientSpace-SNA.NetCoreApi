@@ -3,6 +3,7 @@ using BLC;
 using BLC.LoginComponent;
 using BLC.ProfileComponent;
 using DAL.LoginComponent;
+using DAL.ProfileComponent;
 using Entities;
 using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
@@ -18,9 +19,9 @@ namespace ClientSpaceCoreApi.Controllers
     {
         private readonly BusinessLogicLogin _blc;
         private readonly BusinessLogicProfile _blcProfile;
-        public AuthenticateController(IHttpContextAccessor _contextAccessor, IMapper _mapper, ILoginDAL DAL) {
+        public AuthenticateController(IHttpContextAccessor _contextAccessor, IMapper _mapper, ILoginDAL DAL, IProfileDAL DAL1) {
             _blc = new BusinessLogicLogin(_contextAccessor, _mapper, DAL);
-            _blcProfile = new BusinessLogicProfile(_contextAccessor, _mapper);
+            _blcProfile = new BusinessLogicProfile(_contextAccessor, _mapper, DAL1);
         }
 
         //test1

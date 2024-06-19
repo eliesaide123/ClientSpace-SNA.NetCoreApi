@@ -1,5 +1,6 @@
 ﻿using BLC.PolicyComponent;
 using BLC.RolesComponent;
+using DAL.PolicyComponent;
 using Entities;
 using Entities.IActionResponseDTOs;
 using Microsoft.AspNetCore.Http;
@@ -13,9 +14,9 @@ namespace ClientSpaceCoreApi.Controllers
     public class PolicyController : ControllerBase
     {
         private readonly BusinessLogicPolicy _blcPolicy;
-        public PolicyController(IHttpContextAccessor _contextAccessor)
+        public PolicyController(IHttpContextAccessor _contextAccessor, IPolicyDAL DAL)
         {
-            _blcPolicy = new BusinessLogicPolicy(_contextAccessor);
+            _blcPolicy = new BusinessLogicPolicy(_contextAccessor, DAL);
         }
 
         [HttpPost("get-policy-details")]

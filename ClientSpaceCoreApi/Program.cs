@@ -1,5 +1,7 @@
 using ClientSpaceCoreApi.Mappers;
 using DAL.LoginComponent;
+using DAL.PolicyComponent;
+using DAL.ProfileComponent;
 using DAL.RolesComponent;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.IISIntegration;
@@ -18,6 +20,8 @@ builder.Services.AddSession(options =>
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ILoginDAL, LoginDAL>();
 builder.Services.AddTransient<IRolesDAL, RolesDAL>();
+builder.Services.AddTransient<IProfileDAL, ProfileDAL>();
+builder.Services.AddTransient<IPolicyDAL, PolicyDAL>();
 
 builder.Services.AddCors(options =>
 {
