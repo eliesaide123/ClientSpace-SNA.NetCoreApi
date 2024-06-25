@@ -440,6 +440,11 @@
             "Type": "Q"
           },
           {
+            "Name": "PAGING_DIRECTION",
+            "Value": "",
+            "Type": "O"
+          },
+          {
             "Name": "PAGING_START_INDEX",
             "Value": "Fill_StartIndex",
             "Type": "Q"
